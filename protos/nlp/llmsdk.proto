@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package nlp.llmsdk;
+option go_package = "bogoo.com/nlp/llmsdk";
+
+import "nlp/test1/test1.proto"; 
+
+message Empty {}
+
+// 报告列表返回的数据格式
+message ReportListObject {}
+
+
+
+service HandlerService {
+    rpc AddInbound(nlp.test1.MyStruct1) returns (Empty) {}
+}

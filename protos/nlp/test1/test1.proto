@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package nlp.test1;
+option go_package = "bogoo.com/nlp/test1";
+option java_package = "bogoo.com/nlp/test1";
+option java_multiple_files = true;
+
+message MyStruct1 {
+    string a = 1;
+    int32 b = 2;
+}

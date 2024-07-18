@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package user_center;
+option go_package = "bogoo.com/user_center";
+
+message Empty {}
+
+message NewCaptchaResponse {
+    int32 code = 1;
+    string message = 2;
+    string serial = 3;
+    string image = 4;
+    int32  expire_sec = 5;
+    string text = 6;
+}
+
+message NewJWKSRequest {
+    repeated string issuss = 1;
+    int32  key_qty = 2;
+}
+
+message NewJWKSResponse {
+    int32 code = 1;
+    string message = 2;
+    bool status = 3;
+}
+
+message UserRegistryRequest {
+    string username = 1;
+    string password = 2;
+    optional string mobile = 3;
+    optional string email = 4;
+    string serial = 5;
+    string code = 6;
+}
+
+message UserRegistryResponse {
+    int32 code = 1;
+    string message = 2;
+    int64 uid = 3;
+    string token = 4;
+    int64 expire_sec = 5;
+}
+
+message UserLoginRequest {
+    string password = 1;
+    optional string mobile = 2;
+    optional string email = 3;
+    string serial = 4;
+    string code = 5;
+}
+
+
+message UserLoginResponse {
+    int32 code = 1;
+    string message = 2;
+    int64 uid = 3;
+    string token = 4;
+    int64 expire_sec = 55;
+}
+
+
+message UpdateTokenResponse {
+    int32 code = 1;
+    string message = 2;
+    string token = 3;
+    int64 expire_sec = 4;
+}
+
+
+service UserCenterService {
+    rpc NewCaptcha(Empty) returns (NewCaptchaResponse) {}
+    rpc UserRegistry(UserRegistryRequest) returns (UserRegistryResponse) {}
+    rpc UserLogin(UserLoginRequest) returns (UserLoginResponse) {}
+    rpc UpdateToken(Empty) returns (UpdateTokenResponse) {}
+
+    // 生成新的JWKS
+    rpc NewJWKS(NewJWKSRequest) returns (NewJWKSResponse) {}
+}
